@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Hole Coffee Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=roundo@400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media print {
+            .slide { page-break-after: always; }
+        }
+        body { 
+            background-color: #0a0a12; 
+            color: #ffffff; 
+            font-family: 'Roundo', sans-serif;
+            overflow-x: hidden;
+        }
+        .slide { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-galaxy { 
+            background: radial-gradient(ellipse at center, #1e0033 0%, #0a0a12 70%, #000000 100%);
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            width: 140px;
+            z-index: 20;
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
+        }
+        .slide-content {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        .cosmic-decoration {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        .coffee-particle {
+            position: absolute;
+            background: #5C2C0D;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0.8;
+        }
+        .roast-level {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #f59e0b 0%, #5C2C0D 70%, transparent 100%);
+            filter: blur(5px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+        .hieroglyph {
+            position: absolute;
+            font-family: sans-serif;
+            opacity: 0.1;
+            font-size: 8rem;
+            transform: rotate(15deg);
+        }
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #f59e0b, #fbbf24);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+        .slide-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #f59e0b, transparent);
+        }
+        .slide-list {
+            list-style-type: none;
+            font-size: 1.5rem;
+            line-height: 1.6;
+        }
+        .slide-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.25rem;
+        }
+        .slide-list li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .roasting-beam {
+            position: absolute;
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #f59e0b, transparent);
+            transform-origin: left center;
+            animation: scan 8s infinite linear;
+            filter: blur(1px);
+            opacity: 0.7;
+        }
+        @keyframes scan {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .team-member {
+            background: rgba(30, 0, 51, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.1);
+        }
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f59e0b;
+            margin-right: 2rem;
+            background: #1e0033;
+        }
+        .member-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+        .member-info p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        .member-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .member-social a {
+            color: #d1d5db;
+            transition: color 0.2s ease;
+        }
+        .member-social a:hover {
+            color: #f59e0b;
+        }
+        .social-menu-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .social-toggle {
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+        }
+        .social-toggle:hover {
+            transform: scale(1.1);
+        }
+        .social-toggle i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        .social-links {
+            display: none;
+            background: rgba(10, 10, 18, 0.9);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        .social-links.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            margin-bottom: 0.5rem;
+        }
+        .social-link:hover {
+            background: rgba(245, 158, 11, 0.2);
+            transform: translateX(-5px);
+        }
+        .social-link i {
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            width: 25px;
+            text-align: center;
+        }
+        .social-link.facebook { color: #1877f2; }
+        .social-link.instagram { color: #e4405f; }
+        .social-link.tiktok { color: #25f4ee; }
+        .social-link.whatsapp { color: #25d366; }
+        .social-link.website { color: #f59e0b; }
+        .social-link.menu { color: #fbbf24; }
+        
+        .coming-soon {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(10, 10, 18, 0.9);
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+        .coming-soon span {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cosmic decorations (stars and coffee elements) -->
+    <div id="stars-container"></div>
+    <div id="coffee-container"></div>
+
+    <!-- Slide 1: Brand Introduction -->
+    <div class="slide bg-galaxy">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Roasting visual -->
+        <div class="roast-level" style="width: 400px; height: 400px; right: -100px; top: -100px;"></div>
+        <!-- Egyptian hieroglyph decoration -->
+        <div class="hieroglyph" style="bottom: 10%; right: 5%;">☥</div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">Black Hole Coffee<br><span style="font-size: 2rem; display: block; margin-top: 0.5rem;">Born in Egypt, Brewed for the Universe</span></h1>
+            <ul class="slide-list">
+                <li>A specialty coffee brand proudly rooted in Egypt</li>
+                <li>Mission: To transform every cup into a moment of calm, creativity, and connection</li>
+                <li>Unique Selling Point: Fuses local heritage with cosmic identity—coffee that transports you beyond the noise</li>
+                <li>Known for deep flavors, clean design, and storytelling through every blend</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 2: Brand Story & Vision -->
+    <div class="slide bg-galaxy">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Roasting visual -->
+        <div class="roasting-beam" style="top: 50%; left: 50%;"></div>
+        <div class="roast-level" style="width: 300px; height: 300px; left: 50%; top: 50%; transform: translate(-50%, -50%); animation: pulse 4s infinite;"></div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">From Cairo to the Cosmos</h1>
+            <ul class="slide-list">
+                <li>Born out of a love for coffee and cosmic wonder by passionate Egyptian founders</li>
+                <li>Name inspired by the mystery and pull of black holes—each cup is a journey inward and outward</li>
+                <li>Vision: To become a portal of peaceful, immersive experiences through coffee</li>
+                <li>Invites customers to disconnect from noise and reconnect with themselves through specialty brews</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: Products & Services -->
+    <div class="slide bg-galaxy">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Coffee particles floating up -->
+        <div id="product-coffee-particles"></div>
+        <!-- Egyptian hieroglyph decoration -->
+        <div class="hieroglyph" style="top: 20%; left: 10%;">𓃭</div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">Crafted Galaxies in a Cup</h1>
+            <ul class="slide-list">
+                <li>Wide range of products: single origin, blends, decaf, Turkish, and instant coffee</li>
+                <li>Specialty brewing methods: Filter, V60, Chemex, Espresso, Turkish</li>
+                <li>Signature Blends: Nebula Noir, Dark Matter, Zero-G Decaf</li>
+                <li>Roasted in small batches with flavor integrity and consistency in mind</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 4: Community & Impact -->
+    <div class="slide bg-galaxy">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Roasting visual -->
+        <div class="roast-level" style="width: 500px; height: 500px; left: -150px; bottom: -150px;"></div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">Rooted in Culture, Rising with Community</h1>
+            <ul class="slide-list">
+                <li>Collaborates with local Egyptian roasters and artists</li>
+                <li>Promotes awareness of specialty coffee among Egyptian consumers</li>
+                <li>Uses sustainable packaging and supports ethical sourcing</li>
+                <li>Hosts pop-ups, cupping sessions, and educational coffee content</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 5: Future Goals -->
+    <div class="slide bg-galaxy">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Roasting visual -->
+        <div class="roasting-beam" style="top: 30%; left: 30%; animation-delay: 1s;"></div>
+        <div class="roasting-beam" style="top: 70%; left: 70%; animation-delay: 3s;"></div>
+        <!-- Egyptian hieroglyph decoration -->
+        <div class="hieroglyph" style="bottom: 20%; right: 15%;">𓆣</div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">Shooting for the Stars</h1>
+            <ul class="slide-list">
+                <li>Open flagship Black Hole Coffee store in Cairo</li>
+                <li>Expand product line to include cold brews, seasonal blends, and merchandise</li>
+                <li>Build Egypt's first fully immersive coffee tasting experience</li>
+                <li>Position Black Hole Coffee as a cultural bridge between Egypt and the world</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 6: Team -->
+    <div class="slide bg-galaxy">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Roasting visual -->
+        <div class="roast-level" style="width: 600px; height: 600px; right: -200px; bottom: -200px;"></div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">Black Hole Leadership</h1>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="Samir.jpg" alt="Ahmed Samir" class="member-photo">
+                    <div class="member-info">
+                        <h3>Ahmed Samir</h3>
+                        <p>Founder & CEO</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/in/ahmedsamirir/" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Alaa.jpeg" alt="Mohamed Alaa" class="member-photo">
+                    <div class="member-info">
+                        <h3>Mohamed Alaa</h3>
+                        <p>Co-Founder & CFO</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/in/mohamed-alaadin/" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Emad.jpg" alt="Mohamed Emad" class="member-photo">
+                    <div class="member-info">
+                        <h3>Mohamed Emad</h3>
+                        <p>Co-Founder & CTO</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/in/muhammad-emad-hanafy-0b2a72196/" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Sadat.jpeg" alt="Ebrahim El-Sadat" class="member-photo">
+                    <div class="member-info">
+                        <h3>Ebrahim El-Sadat</h3>
+                        <p>Co-Founder & COO</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/in/ebrahim-elsadat/" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media & Menu Toggle -->
+    <div class="social-menu-container">
+        <div class="social-toggle" id="socialToggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="social-links" id="socialLinks">
+            <a href="https://www.facebook.com/blackholecoffee.eg" target="_blank" class="social-link facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/blackholecoffee.eg/" target="_blank" class="social-link instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.tiktok.com/@blackholecoffee.eg" target="_blank" class="social-link tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://wa.me/201055775760" target="_blank" class="social-link whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="#" class="social-link website">
+                <i class="fas fa-globe"></i> Website (Coming Soon)
+            </a>
+            <a href="https://drive.google.com/file/d/1Xq6P1vijJ82rOOJ80eLHKOdoKf1_aNC_/view" class="social-link menu">
+                <i class="fas fa-coffee"></i> View Menu
+            </a>
+        </div>
+    </div>
+    
+    <!-- Website Coming Soon Notice -->
+    <div class="coming-soon">
+        <i class="fas fa-rocket"></i> Our website launching <span>SOON</span>
+    </div>
+
+    <!-- Slide 7: Coffee Menu -->
+    <div class="slide bg-galaxy" id="menu">
+        <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
+        <!-- Roasting visual -->
+        <div class="roast-level" style="width: 600px; height: 600px; left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+        
+        <div class="slide-content">
+            <h1 class="slide-title">Cosmic Coffee Menu</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <!-- Coffee Blends -->
+                <div class="bg-gradient-to-br from-[#1e0033] to-[#0a0a12] p-6 rounded-xl border border-[#f59e0b]/20">
+                    <h3 class="text-2xl font-bold text-yellow-300 mb-4 flex items-center">
+                        <i class="fas fa-meteor mr-3"></i> Signature Blends
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between">
+                            <span>Nebula Noir</span>
+                            <span class="text-yellow-300">Dark Roast</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Dark Matter</span>
+                            <span class="text-yellow-300">Medium-Dark</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Zero-G Decaf</span>
+                            <span class="text-yellow-300">Swiss Water Process</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Brew Methods -->
+                <div class="bg-gradient-to-br from-[#1e0033] to-[#0a0a12] p-6 rounded-xl border border-[#f59e0b]/20">
+                    <h3 class="text-2xl font-bold text-yellow-300 mb-4 flex items-center">
+                        <i class="fas fa-flask mr-3"></i> Brewing Methods
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between">
+                            <span>V60 Pour Over</span>
+                            <span class="text-yellow-300">Clean & Bright</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Espresso</span>
+                            <span class="text-yellow-300">Intense & Creamy</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Turkish</span>
+                            <span class="text-yellow-300">Traditional</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-yellow-300">
+                <p>Scan our QR code or visit our social media for full menu</p>
+                <div class="inline-block bg-white p-2 rounded-lg mt-2">
+                    <!-- Placeholder for QR code image -->
+                    <div class="w-32 h-32 bg-gray-200 flex items-center justify-center">
+                      <img src="Menu-qr.png" alt="Menu qr" class="qr">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create twinkling stars
+        const starsContainer = document.getElementById('stars-container');
+        const slideCount = document.querySelectorAll('.slide').length;
+        
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const size = Math.random() * 2 + 1;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100 * slideCount;
+            const delay = Math.random() * 3;
+            const duration = Math.random() * 2 + 1;
+            
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${left}%`;
+            star.style.top = `${top}%`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.animationDuration = `${duration}s`;
+            
+            starsContainer.appendChild(star);
+        }
+
+        // Create coffee particles (for product slide)
+        const coffeeContainer = document.getElementById('product-coffee-particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'coffee-particle';
+            
+            const size = Math.random() * 8 + 2;
+            const left = Math.random() * 100;
+            const delay = Math.random() * 15;
+            const duration = Math.random() * 10 + 10;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}%`;
+            particle.style.bottom = `-${size}px`;
+            particle.style.animationDelay = `${delay}s`;
+            particle.style.animationDuration = `${duration}s`;
+            
+            coffeeContainer.appendChild(particle);
+        }
+
+        // Additional coffee particles for all slides
+        const allCoffeeContainer = document.getElementById('coffee-container');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'coffee-particle';
+            
+            const size = Math.random() * 5 + 1;
+            const left = Math.random() * 100;
+            const delay = Math.random() * 20;
+            const duration = Math.random() * 15 + 15;
+            const opacity = Math.random() * 0.5 + 0.3;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}%`;
+            particle.style.bottom = `-${size}px`;
+            particle.style.animationDelay = `${delay}s`;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.opacity = opacity;
+            
+            allCoffeeContainer.appendChild(particle);
+        }
+
+        // Social Media Toggle
+        const socialToggle = document.getElementById('socialToggle');
+        const socialLinks = document.getElementById('socialLinks');
+        
+        socialToggle.addEventListener('click', () => {
+            socialLinks.classList.toggle('active');
+        });
+        
+        // Close social menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!socialToggle.contains(e.target) && !socialLinks.contains(e.target)) {
+                socialLinks.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
