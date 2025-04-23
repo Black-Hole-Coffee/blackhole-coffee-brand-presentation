@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Black Hole Coffee Presentation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=roundo@400,500,600,700&display=swap" rel="stylesheet">
@@ -16,26 +16,40 @@
             color: #ffffff; 
             font-family: 'Roundo', sans-serif;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
         .slide { 
-            height: 100vh; 
+            min-height: 100vh; 
+            height: auto;
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
-            padding: 4rem;
+            padding: 2rem 1rem;
             position: relative;
             overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .slide {
+                padding: 4rem;
+            }
         }
         .bg-galaxy { 
             background: radial-gradient(ellipse at center, #1e0033 0%, #0a0a12 70%, #000000 100%);
         }
         .logo {
             position: absolute;
-            top: 2rem;
-            left: 2rem;
-            width: 140px;
+            top: 1rem;
+            left: 1rem;
+            width: 80px;
             z-index: 20;
             filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
+        }
+        @media (min-width: 768px) {
+            .logo {
+                top: 2rem;
+                left: 2rem;
+                width: 140px;
+            }
         }
         .slide-content {
             max-width: 900px;
@@ -43,11 +57,23 @@
             width: 100%;
             position: relative;
             z-index: 10;
+            padding: 1rem;
+        }
+        @media (min-width: 768px) {
+            .slide-content {
+                padding: 0;
+            }
         }
         .cosmic-decoration {
             position: absolute;
             opacity: 0.15;
             z-index: 1;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .cosmic-decoration {
+                display: block;
+            }
         }
         .star {
             position: absolute;
@@ -69,6 +95,12 @@
             filter: blur(5px);
             opacity: 0.3;
             z-index: 0;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .roast-level {
+                display: block;
+            }
         }
         @keyframes twinkle {
             0% { opacity: 0.3; }
@@ -87,47 +119,86 @@
             position: absolute;
             font-family: sans-serif;
             opacity: 0.1;
-            font-size: 8rem;
+            font-size: 4rem;
             transform: rotate(15deg);
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .hieroglyph {
+                display: block;
+                font-size: 8rem;
+            }
         }
         .slide-title {
-            font-size: 3.5rem;
+            font-size: 2rem;
             font-weight: 700;
             background: linear-gradient(to right, #f59e0b, #fbbf24);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
             text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+            line-height: 1.2;
+        }
+        @media (min-width: 768px) {
+            .slide-title {
+                font-size: 3.5rem;
+                margin-bottom: 2.5rem;
+            }
         }
         .slide-title:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -5px;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(to right, #f59e0b, transparent);
+        }
+        @media (min-width: 768px) {
+            .slide-title:after {
+                bottom: -10px;
+                height: 3px;
+            }
         }
         .slide-list {
             list-style-type: none;
-            font-size: 1.5rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
+            padding-left: 1rem;
+        }
+        @media (min-width: 768px) {
+            .slide-list {
+                font-size: 1.5rem;
+                line-height: 1.6;
+                padding-left: 0;
+            }
         }
         .slide-list li {
             position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .slide-list li {
+                padding-left: 2rem;
+                margin-bottom: 1.25rem;
+            }
         }
         .slide-list li:before {
             content: '•';
             position: absolute;
             left: 0;
             color: #f59e0b;
-            font-size: 2rem;
+            font-size: 1.5rem;
             line-height: 1;
+        }
+        @media (min-width: 768px) {
+            .slide-list li:before {
+                font-size: 2rem;
+            }
         }
         .roasting-beam {
             position: absolute;
@@ -138,6 +209,12 @@
             animation: scan 8s infinite linear;
             filter: blur(1px);
             opacity: 0.7;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .roasting-beam {
+                display: block;
+            }
         }
         @keyframes scan {
             0% { transform: rotate(0deg); }
@@ -145,68 +222,118 @@
         }
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                margin-top: 3rem;
+            }
         }
         .team-member {
             background: rgba(30, 0, 51, 0.5);
-            border-radius: 1rem;
-            padding: 2rem;
+            border-radius: 0.75rem;
+            padding: 1rem;
             display: flex;
             align-items: center;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(245, 158, 11, 0.2);
             transition: transform 0.3s ease;
         }
+        @media (min-width: 768px) {
+            .team-member {
+                padding: 2rem;
+                border-radius: 1rem;
+            }
+        }
         .team-member:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(245, 158, 11, 0.1);
         }
         .member-photo {
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #f59e0b;
-            margin-right: 2rem;
+            border: 2px solid #f59e0b;
+            margin-right: 1rem;
             background: #1e0033;
         }
+        @media (min-width: 768px) {
+            .member-photo {
+                width: 120px;
+                height: 120px;
+                border: 3px solid #f59e0b;
+                margin-right: 2rem;
+            }
+        }
         .member-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #fbbf24;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        @media (min-width: 768px) {
+            .member-info h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
         }
         .member-info p {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        @media (min-width: 768px) {
+            .member-info p {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
         }
         .member-social {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .member-social {
+                gap: 0.75rem;
+            }
         }
         .member-social a {
             color: #d1d5db;
             transition: color 0.2s ease;
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .member-social a {
+                font-size: 1rem;
+            }
         }
         .member-social a:hover {
             color: #f59e0b;
         }
         .social-menu-container {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1rem;
+            right: 1rem;
             z-index: 100;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
         }
+        @media (min-width: 768px) {
+            .social-menu-container {
+                bottom: 2rem;
+                right: 2rem;
+            }
+        }
         .social-toggle {
             background: linear-gradient(135deg, #f59e0b, #b45309);
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -215,21 +342,41 @@
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
             transition: all 0.3s ease;
         }
+        @media (min-width: 768px) {
+            .social-toggle {
+                width: 50px;
+                height: 50px;
+            }
+        }
         .social-toggle:hover {
             transform: scale(1.1);
         }
         .social-toggle i {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: white;
+        }
+        @media (min-width: 768px) {
+            .social-toggle i {
+                font-size: 1.5rem;
+            }
         }
         .social-links {
             display: none;
             background: rgba(10, 10, 18, 0.9);
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-top: 1rem;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
             border: 1px solid rgba(245, 158, 11, 0.3);
             backdrop-filter: blur(5px);
+            width: 180px;
+        }
+        @media (min-width: 768px) {
+            .social-links {
+                border-radius: 1rem;
+                padding: 1rem;
+                margin-top: 1rem;
+                width: auto;
+            }
         }
         .social-links.active {
             display: block;
@@ -238,22 +385,37 @@
         .social-link {
             display: flex;
             align-items: center;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.75rem;
             color: white;
             text-decoration: none;
             border-radius: 0.5rem;
             transition: all 0.2s ease;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .social-link {
+                padding: 0.75rem 1rem;
+                margin-bottom: 0.5rem;
+                font-size: 1rem;
+            }
         }
         .social-link:hover {
             background: rgba(245, 158, 11, 0.2);
             transform: translateX(-5px);
         }
         .social-link i {
-            font-size: 1.25rem;
-            margin-right: 0.75rem;
-            width: 25px;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+            width: 20px;
             text-align: center;
+        }
+        @media (min-width: 768px) {
+            .social-link i {
+                font-size: 1.25rem;
+                margin-right: 0.75rem;
+                width: 25px;
+            }
         }
         .social-link.facebook { color: #1877f2; }
         .social-link.instagram { color: #e4405f; }
@@ -264,15 +426,27 @@
         
         .coming-soon {
             position: fixed;
-            bottom: 2rem;
-            left: 2rem;
+            bottom: 1rem;
+            left: 1rem;
             background: rgba(10, 10, 18, 0.9);
-            border-radius: 1rem;
-            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
             border: 1px solid rgba(245, 158, 11, 0.3);
             backdrop-filter: blur(5px);
             z-index: 100;
             animation: pulse 2s infinite;
+            font-size: 0.8rem;
+            max-width: calc(100% - 2rem);
+        }
+        @media (min-width: 768px) {
+            .coming-soon {
+                bottom: 2rem;
+                left: 2rem;
+                border-radius: 1rem;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                max-width: none;
+            }
         }
         .coming-soon span {
             color: #f59e0b;
@@ -282,6 +456,79 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Menu Slide Specific */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        @media (min-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+        }
+        .menu-card {
+            background: linear-gradient(to bottom right, rgba(30, 0, 51, 0.7), rgba(10, 10, 18, 0.9));
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        @media (min-width: 768px) {
+            .menu-card {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+        .menu-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .menu-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+        .menu-card ul {
+            list-style-type: none;
+        }
+        .menu-card li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed rgba(245, 158, 11, 0.2);
+        }
+        .menu-card li:last-child {
+            border-bottom: none;
+        }
+        .menu-card li span:last-child {
+            color: #f59e0b;
+            font-weight: 500;
+        }
+        .qr-container {
+            width: 120px;
+            height: 120px;
+            margin: 1rem auto 0;
+        }
+        @media (min-width: 768px) {
+            .qr-container {
+                width: 150px;
+                height: 150px;
+                margin: 1.5rem auto 0;
+            }
+        }
+        .qr-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -299,7 +546,7 @@
         <div class="hieroglyph" style="bottom: 10%; right: 5%;">☥</div>
         
         <div class="slide-content">
-            <h1 class="slide-title">Black Hole Coffee<br><span style="font-size: 2rem; display: block; margin-top: 0.5rem;">Born in Egypt, Brewed for the Universe</span></h1>
+            <h1 class="slide-title">Black Hole Coffee<br><span style="font-size: 1.25rem; display: block; margin-top: 0.5rem;">Born in Egypt, Brewed for the Universe</span></h1>
             <ul class="slide-list">
                 <li>A specialty coffee brand proudly rooted in Egypt</li>
                 <li>Mission: To transform every cup into a moment of calm, creativity, and connection</li>
@@ -484,56 +731,49 @@
         
         <div class="slide-content">
             <h1 class="slide-title">Cosmic Coffee Menu</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div class="menu-grid">
                 <!-- Coffee Blends -->
-                <div class="bg-gradient-to-br from-[#1e0033] to-[#0a0a12] p-6 rounded-xl border border-[#f59e0b]/20">
-                    <h3 class="text-2xl font-bold text-yellow-300 mb-4 flex items-center">
-                        <i class="fas fa-meteor mr-3"></i> Signature Blends
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex justify-between">
+                <div class="menu-card">
+                    <h3><i class="fas fa-meteor mr-2"></i> Signature Blends</h3>
+                    <ul>
+                        <li>
                             <span>Nebula Noir</span>
-                            <span class="text-yellow-300">Dark Roast</span>
+                            <span>Dark Roast</span>
                         </li>
-                        <li class="flex justify-between">
+                        <li>
                             <span>Dark Matter</span>
-                            <span class="text-yellow-300">Medium-Dark</span>
+                            <span>Medium-Dark</span>
                         </li>
-                        <li class="flex justify-between">
+                        <li>
                             <span>Zero-G Decaf</span>
-                            <span class="text-yellow-300">Swiss Water Process</span>
+                            <span>Swiss Water Process</span>
                         </li>
                     </ul>
                 </div>
                 
                 <!-- Brew Methods -->
-                <div class="bg-gradient-to-br from-[#1e0033] to-[#0a0a12] p-6 rounded-xl border border-[#f59e0b]/20">
-                    <h3 class="text-2xl font-bold text-yellow-300 mb-4 flex items-center">
-                        <i class="fas fa-flask mr-3"></i> Brewing Methods
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex justify-between">
+                <div class="menu-card">
+                    <h3><i class="fas fa-flask mr-2"></i> Brewing Methods</h3>
+                    <ul>
+                        <li>
                             <span>V60 Pour Over</span>
-                            <span class="text-yellow-300">Clean & Bright</span>
+                            <span>Clean & Bright</span>
                         </li>
-                        <li class="flex justify-between">
+                        <li>
                             <span>Espresso</span>
-                            <span class="text-yellow-300">Intense & Creamy</span>
+                            <span>Intense & Creamy</span>
                         </li>
-                        <li class="flex justify-between">
+                        <li>
                             <span>Turkish</span>
-                            <span class="text-yellow-300">Traditional</span>
+                            <span>Traditional</span>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-8 text-center text-yellow-300">
+            <div class="text-center text-yellow-300 mt-4">
                 <p>Scan our QR code or visit our social media for full menu</p>
-                <div class="inline-block bg-white p-2 rounded-lg mt-2">
-                    <!-- Placeholder for QR code image -->
-                    <div class="w-32 h-32 bg-gray-200 flex items-center justify-center">
-                      <img src="Menu-qr.png" alt="Menu qr" class="qr">
-                    </div>
+                <div class="qr-container">
+                    <img src="Menu-qr.png" alt="Menu QR Code" class="qr">
                 </div>
             </div>
         </div>
@@ -544,7 +784,10 @@
         const starsContainer = document.getElementById('stars-container');
         const slideCount = document.querySelectorAll('.slide').length;
         
-        for (let i = 0; i < 100; i++) {
+        // Reduce number of stars on mobile
+        const starCount = window.innerWidth < 768 ? 50 : 100;
+        
+        for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             
@@ -566,11 +809,14 @@
 
         // Create coffee particles (for product slide)
         const coffeeContainer = document.getElementById('product-coffee-particles');
-        for (let i = 0; i < 30; i++) {
+        // Reduce particles on mobile
+        const particleCount = window.innerWidth < 768 ? 15 : 30;
+        
+        for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'coffee-particle';
             
-            const size = Math.random() * 8 + 2;
+            const size = Math.random() * (window.innerWidth < 768 ? 4 : 8) + 2;
             const left = Math.random() * 100;
             const delay = Math.random() * 15;
             const duration = Math.random() * 10 + 10;
@@ -587,11 +833,14 @@
 
         // Additional coffee particles for all slides
         const allCoffeeContainer = document.getElementById('coffee-container');
-        for (let i = 0; i < 50; i++) {
+        // Reduce particles on mobile
+        const allParticleCount = window.innerWidth < 768 ? 25 : 50;
+        
+        for (let i = 0; i < allParticleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'coffee-particle';
             
-            const size = Math.random() * 5 + 1;
+            const size = Math.random() * (window.innerWidth < 768 ? 3 : 5) + 1;
             const left = Math.random() * 100;
             const delay = Math.random() * 20;
             const duration = Math.random() * 15 + 15;
@@ -621,6 +870,12 @@
             if (!socialToggle.contains(e.target) && !socialLinks.contains(e.target)) {
                 socialLinks.classList.remove('active');
             }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // You could add resize handling here if needed
+            // Currently the mobile styles are handled by CSS media queries
         });
     </script>
 </body>
