@@ -88,20 +88,64 @@
             animation: float 15s infinite linear;
             opacity: 0.8;
         }
-        .roast-level {
+        
+        /* New Coffee Roasting Animations */
+        .coffee-bean {
             position: absolute;
+            width: 15px;
+            height: 10px;
+            background: #5C2C0D;
             border-radius: 50%;
-            background: radial-gradient(circle, #f59e0b 0%, #5C2C0D 70%, transparent 100%);
-            filter: blur(5px);
-            opacity: 0.3;
-            z-index: 0;
-            display: none;
+            opacity: 0;
+            animation: roast-bean 8s infinite;
+            z-index: 5;
         }
-        @media (min-width: 768px) {
-            .roast-level {
-                display: block;
+        
+        @keyframes roast-bean {
+            0% { 
+                opacity: 0;
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                background: #5C2C0D;
+            }
+            10% { opacity: 1; }
+            50% { 
+                transform: translateY(-100px) rotate(180deg) scale(1.2);
+                background: #8B4513;
+            }
+            80% { 
+                background: #D27D46;
+                opacity: 1;
+            }
+            100% { 
+                opacity: 0;
+                transform: translateY(-200px) rotate(360deg) scale(0.8);
+                background: #f59e0b;
             }
         }
+
+        .roast-smoke {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float-smoke 6s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes float-smoke {
+            0% { 
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            20% { opacity: 0.6; }
+            100% { 
+                opacity: 0;
+                transform: translateY(-150px) scale(2);
+            }
+        }
+
         @keyframes twinkle {
             0% { opacity: 0.3; }
             100% { opacity: 1; }
@@ -199,26 +243,6 @@
             .slide-list li:before {
                 font-size: 2rem;
             }
-        }
-        .roasting-beam {
-            position: absolute;
-            width: 300px;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #f59e0b, transparent);
-            transform-origin: left center;
-            animation: scan 8s infinite linear;
-            filter: blur(1px);
-            opacity: 0.7;
-            display: none;
-        }
-        @media (min-width: 768px) {
-            .roasting-beam {
-                display: block;
-            }
-        }
-        @keyframes scan {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         .team-grid {
             display: grid;
@@ -513,22 +537,28 @@
             color: #f59e0b;
             font-weight: 500;
         }
+        
+        /* Updated QR Code Container */
         .qr-container {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-top: 1rem;
+        }
+        
+        .qr-code {
             width: 120px;
             height: 120px;
-            margin: 1rem auto 0;
+            display: block;
         }
+        
         @media (min-width: 768px) {
-            .qr-container {
+            .qr-code {
                 width: 150px;
                 height: 150px;
-                margin: 1.5rem auto 0;
             }
-        }
-        .qr-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
         }
     </style>
 </head>
@@ -559,9 +589,8 @@
     <!-- Slide 2: Brand Story & Vision -->
     <div class="slide bg-galaxy">
         <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
-        <!-- Roasting visual -->
-        <div class="roasting-beam" style="top: 50%; left: 50%;"></div>
-        <div class="roast-level" style="width: 300px; height: 300px; left: 50%; top: 50%; transform: translate(-50%, -50%); animation: pulse 4s infinite;"></div>
+        <!-- New Roasting Animation Container -->
+        <div id="roasting-animation-1"></div>
         
         <div class="slide-content">
             <h1 class="slide-title">From Cairo to the Cosmos</h1>
@@ -581,6 +610,8 @@
         <div id="product-coffee-particles"></div>
         <!-- Egyptian hieroglyph decoration -->
         <div class="hieroglyph" style="top: 20%; left: 10%;">𓃭</div>
+        <!-- New Roasting Animation Container -->
+        <div id="roasting-animation-2"></div>
         
         <div class="slide-content">
             <h1 class="slide-title">Crafted Galaxies in a Cup</h1>
@@ -598,6 +629,8 @@
         <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
         <!-- Roasting visual -->
         <div class="roast-level" style="width: 500px; height: 500px; left: -150px; bottom: -150px;"></div>
+        <!-- New Roasting Animation Container -->
+        <div id="roasting-animation-3"></div>
         
         <div class="slide-content">
             <h1 class="slide-title">Rooted in Culture, Rising with Community</h1>
@@ -613,9 +646,8 @@
     <!-- Slide 5: Future Goals -->
     <div class="slide bg-galaxy">
         <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
-        <!-- Roasting visual -->
-        <div class="roasting-beam" style="top: 30%; left: 30%; animation-delay: 1s;"></div>
-        <div class="roasting-beam" style="top: 70%; left: 70%; animation-delay: 3s;"></div>
+        <!-- New Roasting Animation Container -->
+        <div id="roasting-animation-4"></div>
         <!-- Egyptian hieroglyph decoration -->
         <div class="hieroglyph" style="bottom: 20%; right: 15%;">𓆣</div>
         
@@ -635,6 +667,8 @@
         <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
         <!-- Roasting visual -->
         <div class="roast-level" style="width: 600px; height: 600px; right: -200px; bottom: -200px;"></div>
+        <!-- New Roasting Animation Container -->
+        <div id="roasting-animation-5"></div>
         
         <div class="slide-content">
             <h1 class="slide-title">Black Hole Leadership</h1>
@@ -726,8 +760,8 @@
     <!-- Slide 7: Coffee Menu -->
     <div class="slide bg-galaxy" id="menu">
         <img src="black-hole-logo-white.png" alt="Black Hole Coffee Logo" class="logo">
-        <!-- Roasting visual -->
-        <div class="roast-level" style="width: 600px; height: 600px; left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+        <!-- New Roasting Animation Container -->
+        <div id="roasting-animation-6"></div>
         
         <div class="slide-content">
             <h1 class="slide-title">Cosmic Coffee Menu</h1>
@@ -773,7 +807,7 @@
             <div class="text-center text-yellow-300 mt-4">
                 <p>Scan our QR code or visit our social media for full menu</p>
                 <div class="qr-container">
-                    <img src="Menu-qr.png" alt="Menu QR Code" class="qr">
+                    <img src="Menu-qr.png" alt="Menu QR Code" class="qr-code">
                 </div>
             </div>
         </div>
@@ -856,6 +890,38 @@
             
             allCoffeeContainer.appendChild(particle);
         }
+
+        // Create coffee roasting animations for all slides
+        function createRoastingAnimation(containerId, beanCount = 6) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            // Create coffee beans
+            for (let i = 0; i < beanCount; i++) {
+                const bean = document.createElement('div');
+                bean.className = 'coffee-bean';
+                bean.style.left = `${Math.random() * 80 + 10}%`;
+                bean.style.bottom = `${Math.random() * 50 + 20}px`;
+                bean.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(bean);
+                
+                // Create smoke particles
+                const smoke = document.createElement('div');
+                smoke.className = 'roast-smoke';
+                smoke.style.left = `${parseFloat(bean.style.left) + (Math.random() * 10 - 5)}%`;
+                smoke.style.bottom = `${parseFloat(bean.style.bottom) - 10}px`;
+                smoke.style.animationDelay = `${parseFloat(bean.style.animationDelay) + 0.5}s`;
+                container.appendChild(smoke);
+            }
+        }
+
+        // Initialize all roasting animations
+        createRoastingAnimation('roasting-animation-1', 4);
+        createRoastingAnimation('roasting-animation-2', 5);
+        createRoastingAnimation('roasting-animation-3', 3);
+        createRoastingAnimation('roasting-animation-4', 4);
+        createRoastingAnimation('roasting-animation-5', 5);
+        createRoastingAnimation('roasting-animation-6', 6);
 
         // Social Media Toggle
         const socialToggle = document.getElementById('socialToggle');
